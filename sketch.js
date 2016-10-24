@@ -1,5 +1,5 @@
 var parser;
-var header, summary, experience, education;
+var header, summary, experience, education, skills;
 var holder;
 var update;
 var highlight;
@@ -19,28 +19,44 @@ function setup() {
   summary = new Summary();
   experience = new Experience();
   education = new Education();
+  skills = new Skills();
 
   header.display();
   summary.display();
   experience.display();
   education.display();
+  skills.display();
 }
 
 function draw() {
   background(200);
   textBoxData = select('#textBox').value();
-  text(textBoxData, 20, 20);
+  
+  var buff = '';
+  if (textWidth(buff) < 50){
+    buff = textBoxData;
+  }
+  else if (textWidth(buff) == 50){
+    buff += '\n';
+    text(buff, 20, 20);
+  }
+  
+  
+  
+  
   //text(update, 20,40);
   if (update = true){
     header.display();
     summary.display();
     experience.display();
     education.display();
+    skills.display();
   }
   selectElement(header);
   selectElement(summary);
   selectElement(experience);
   selectElement(education);
+  selectElement(skills);
 }
 
 function Parser(){
@@ -55,8 +71,7 @@ function Header(){
   this.cls = holder.contact;
   this.elements = [
                     this.cls.title,
-                    this.cls.fname,
-                    this.cls.lname,
+                    this.cls.name,
                     this.cls.address,
                     this.cls.phone,
                     this.cls.email
@@ -131,6 +146,21 @@ function Education(){
   }
 }
 
+function Skills(){
+  this.cls = holder.skills;
+  this.elements = [
+                    this.cls.title,
+                    this.cls.skillCont
+                  ];
+          
+  this.display = function(){
+    for (var i = 0; i < this.elements.length; i++){
+      var txt = new toText(this.elements[i]);
+      txt.write();
+    }
+    update = false;
+  }
+}
 
 function toText(element){
   this.elm = element;

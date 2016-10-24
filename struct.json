@@ -9,22 +9,13 @@
               "xP": 50,
               "yP": 50
             },
-    "fname": 
+    "name": 
             {
               "content": "John",
               "font": "Garamond",
               "fontsize": 20,
               "xP": 300,
               "yP": 50
-            },
-    
-    "lname": 
-            {
-              "content": "Montana",
-              "font": "Garamond",
-              "fontsize": 14,
-              "xP": 300,
-              "yP": 70
             },
     
     "address": 
@@ -227,14 +218,22 @@
   },
   
   "skills":{
-  "id": "skills", 
-  "skills": 
+  "id": "skills",
+  "title": 
+            {
+              "content": "Skills",
+              "font": "Garamond",
+              "fontsize": 16,
+              "xP": 50,
+              "yP": 530
+            },
+  "skillCont": 
             {
               "content": "b",
               "font": "Garamond",
               "font-size": "12",
-              "xP": "300",
-              "yP": "1600"
+              "xP": 300,
+              "yP": 530
             },
             
     "xPos": "0",
