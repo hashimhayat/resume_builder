@@ -1,247 +1,247 @@
 {
-	"contact": {
-	  "id": "Contact", 
-	  "title": 
-        	  {
+  "contact": {
+    "id": "Contact", 
+    "title": 
+            {
               "content": "Contact",
               "font": "Garamond",
               "fontsize": 16,
               "xP": 50,
               "yP": 50
-        	  },
-	  "fname": 
-        	  {
+            },
+    "fname": 
+            {
               "content": "John",
               "font": "Garamond",
               "fontsize": 20,
               "xP": 300,
               "yP": 50
-        	  },
+            },
     
     "lname": 
-        	  {
+            {
               "content": "Montana",
               "font": "Garamond",
               "fontsize": 14,
               "xP": 300,
               "yP": 70
-        	  },
+            },
     
     "address": 
-        	  {
+            {
               "content": "222 Strawberry Avenue New York, NY 10004",
               "font": "Garamond",
               "fontsize": 12,
               "xP": 300,
               "yP": 90
-        	  },
-        	  
+            },
+            
     "phone": 
-        	  {
+            {
               "content": "555-456-7845",
               "font": "Garamond",
               "fontsize": 12,
               "xP": 300,
               "yP": 110
-        	  },
+            },
     
     "email": 
-        	  {
+            {
               "content": "montanajohn@gmail.com",
               "font": "Garamond",
               "fontsize": 12,
               "xP": 300,
               "yP": 130
-        	  },
-		
-		"xPos": "0",
-		"yPos": "0",
-		"height": "0",
-		"width": "0",
-		"progress": "0",
-		"updated":false
-	},
-	
-	"summary_":{
-	  "id":"summary",
-	  "summarytitle":
-	        {
-	        "content": "Summary",
-	        "font": "Garamond",
+            },
+    
+    "xPos": "0",
+    "yPos": "0",
+    "height": "0",
+    "width": "0",
+    "progress": "0",
+    "updated":false
+  },
+  
+  "summary_":{
+    "id":"summary",
+    "summarytitle":
+          {
+          "content": "Summary",
+          "font": "Garamond",
           "fontsize": 16,
           "xP": 50,
           "yP": 170
-	        },
-	        
-	  "summarycont": 
-        	  {
+          },
+          
+    "summarycont": 
+            {
               "content": "A hard-working student looking for an entry-level marketing job.",
               "font": "Garamond",
               "fontsize": 12,
               "xP": 300,
               "yP": 170
-        	  },
-        	  
-		"xPos": "0",
-		"yPos": "0",
-		"height": "0",
-		"width": "0",
-		"progress": "0",
-		"updated":false
-	},
-	
-	"experience":{
-	"id": "experience",
-	"experiencetitle":
-	        {
-	        "content": "Experience",
-	        "font": "Garamond",
+            },
+            
+    "xPos": "0",
+    "yPos": "0",
+    "height": "0",
+    "width": "0",
+    "progress": "0",
+    "updated":false
+  },
+  
+  "experience":{
+  "id": "experience",
+  "experiencetitle":
+          {
+          "content": "Experience",
+          "font": "Garamond",
           "fontsize": 16,
           "xP": 50,
           "yP": 210
-	        },
-	 "job1title":
-	        {
-	        "content": "Marketing Intern",
-	        "font": "Garamond",
+          },
+   "job1title":
+          {
+          "content": "Marketing Intern",
+          "font": "Garamond",
           "fontsize": 12,
           "xP": 300,
           "yP": 210
-	        },
-	 "job1company":
-	        {
-	        "content": "ABC | Jan 2016 - Present",
-	        "font": "Garamond",
+          },
+   "job1company":
+          {
+          "content": "ABC | Jan 2016 - Present",
+          "font": "Garamond",
           "fontsize": 12,
           "xP": 300,
           "yP": 230
-	        },
-	 "job1summary":
-	        {
-	        "content": "Assisted the marketing assistant with data analysis, strategy, and other general office duties.",
-	        "font": "Garamond",
+          },
+   "job1summary":
+          {
+          "content": "Assisted the marketing assistant with data analysis, strategy, and other general office duties.",
+          "font": "Garamond",
           "font-size": 12,
           "xP": 300,
           "yP": 250
-	        },
-	 "job2title":
-	        {
-	        "content": "Editorial Intern",
-	        "font": "Garamond",
-          "font-size": 12,
-          "xP": 300,
-          "yP": 270
-	        },
-	 "job2company":
-	        {
-	        "content": "Pepper Inc. | Sept 2015 - Dec 2015",
-	        "font": "Garamond",
+          },
+   "job2title":
+          {
+          "content": "Editorial Intern",
+          "font": "Garamond",
           "font-size": 12,
           "xP": 300,
           "yP": 290
-	        },
-	 "job2summary":
-	        {
-	        "content": "Managed the blog for Pepper Inc. and wrote daily articles.",
-	        "font": "Garamond",
+          },
+   "job2company":
+          {
+          "content": "Pepper Inc. | Sept 2015 - Dec 2015",
+          "font": "Garamond",
           "font-size": 12,
           "xP": 300,
           "yP": 310
-	        },
-	 "job3title":
-	        {
-	        "content": "Teacher's Assistant",
-	        "font": "Garamond",
+          },
+   "job2summary":
+          {
+          "content": "Managed the blog for Pepper Inc. and wrote daily articles.",
+          "font": "Garamond",
           "font-size": 12,
           "xP": 300,
           "yP": 330
-	        },
-	 "job3company":
-	        {
-	        "content": "Columbia Univeristy | Jan 2015 - May 2015",
-	        "font": "Garamond",
-          "font-size": 12,
-          "xP": 300,
-          "yP": 350
-	        },
-	 "job3summary":
-	        {
-	        "content": "Assisted the marketing professor with grading papers and taking attendance.",
-	        "font": "Garamond",
+          },
+   "job3title":
+          {
+          "content": "Teacher's Assistant",
+          "font": "Garamond",
           "font-size": 12,
           "xP": 300,
           "yP": 370
-	        },
-	        
-	  "xPos": "0",
-		"yPos": "0",
-		"height": "0",
-		"width": "0",
-		"progress": "0",
-		"updated":false
-	},
-	
-	"education":{
-	"id": "education",
-	"title": 
-        	  {
+          },
+   "job3company":
+          {
+          "content": "Columbia Univeristy | Jan 2015 - May 2015",
+          "font": "Garamond",
+          "font-size": 12,
+          "xP": 300,
+          "yP": 390
+          },
+   "job3summary":
+          {
+          "content": "Assisted the marketing professor with grading papers and taking attendance.",
+          "font": "Garamond",
+          "font-size": 12,
+          "xP": 300,
+          "yP": 410
+          },
+          
+    "xPos": "0",
+    "yPos": "0",
+    "height": "0",
+    "width": "0",
+    "progress": "0",
+    "updated":false
+  },
+  
+  "education":{
+  "id": "education",
+  "title": 
+            {
               "content": "Education",
               "font": "Garamond",
               "fontsize": 16,
               "xP": 50,
-              "yP": 350
-        	  },
-	"school": 
-        	  {
+              "yP": 450
+            },
+  "school": 
+            {
               "content": "Columbia University",
               "font": "Garamond",
               "fontsize": 12,
               "xP": 300,
-              "yP": 350
-        	  },
+              "yP": 450
+            },
     
   "major": 
-        	  {
+            {
               "content": "English",
               "font": "Garamond",
               "fontsize": "12",
               "xP": 300,
-              "yP": 370
-        	  },
-        	  
-  "graduation":        	  
+              "yP": 470
+            },
+            
+  "graduation":           
             {
               "content": "2017",
               "font": "Garamond",
               "fontsize": 12,
               "xP": 300,
-              "yP": 390
-        	  },
-        	  
+              "yP": 490
+            },
+            
     "xPos": "0",
-		"yPos": "0",
-		"height": "0",
-		"width": "0",
-		"progress": "0",
-		"updated":false
-	},
-	
-	"skills":{
-	"id": "skills", 
-	"skills": 
-        	  {
+    "yPos": "0",
+    "height": "0",
+    "width": "0",
+    "progress": "0",
+    "updated":false
+  },
+  
+  "skills":{
+  "id": "skills", 
+  "skills": 
+            {
               "content": "b",
               "font": "Garamond",
               "font-size": "12",
               "xP": "300",
               "yP": "1600"
-        	  },
-        	  
+            },
+            
     "xPos": "0",
-		"yPos": "0",
-		"height": "0",
-		"width": "0",
-		"progress": "0",
-		"updated":false
-	}
+    "yPos": "0",
+    "height": "0",
+    "width": "0",
+    "progress": "0",
+    "updated":false
+  }
 }
