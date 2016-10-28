@@ -1,37 +1,38 @@
 var screenW = window.innerWidth;    // Screen Width
 var screenH = window.innerHeight;   // Screen Height
 
-var pages;
+var pages, canvas;
 var header, summary, experience, education, skills;
 var holder;
 var update, canvas;
 var highlight;
 var textBoxData;
-var textBox, control, nextButton;
+var textBox, nextButton, template;
+var firstName, lastName, fullname;
 
 function preload() {
-  // load our Template (JSON) file
   holder = loadJSON('struct.json');
 }
 
 function setup() {
   update = false;
   highlight = false
-  //var canvas = createCanvas(1240,1754);
-  var canvas = createCanvas(screenW,screenH);
   
+  canvas = createCanvas(screenW,screenH);
+  canvas.parent("#main");
+  
+  // Manages the pages on the website
   pages = new Pages();
-  textBox = select("#textBox");
-  control = select("#controls")
-  nextButton = select("#nextButton")
   
+  // Init the Html elements for display.
+  htmlObjectsInit();
+  
+  // Init resume elements
   header = new Header();
   summary = new Summary();
   experience = new Experience();
   education = new Education();
   skills = new Skills();
-  
-  pages.home = true;
 }
 
 function draw() {
@@ -40,19 +41,19 @@ function draw() {
     pages.displayHome();
   }
   
-  if (pages.template){
+  else if (pages.template){
     pages.templateScreen();
   }
   
-  if (pages.login){
+  else if (pages.login){
     pages.loginScreen();
   }
   
-  if (pages.builder){
+  else if (pages.builder){
     pages.resumeBuilder();
   }
 
-  if (pages.debug){
+  else {
     background(34,94,44);
   }
 }
@@ -75,6 +76,9 @@ function Header(){
                   ];
           
   this.display = function(){
+    
+    this.cls.name.content = fullname;
+    
     for (var i = 0; i < this.elements.length; i++){
       var txt = new toText(this.elements[i]);
       txt.write();
@@ -191,7 +195,8 @@ function selectElement(element){
         update = true;
         
         if (mouseIsPressed){
-          field.elements[i].content = textBoxData;
+          //field.elements[i].content = textBoxData;
+          text(field.elements[i].content,20,20);
           update = true;
         } 
       } else {
@@ -201,17 +206,6 @@ function selectElement(element){
   } 
 }
 
-function toggleSettings() {
-  // get the current display value of our settings window
-  var currentDisplay = select("#controls").style('display');
-  
-  if (currentDisplay == "block") {
-    select("#controls").style('display', 'none');
-  }
-  else {
-    select("#controls").style('display', 'block');
-  }
-}
 
 function Pages(){
   this.home = true;
@@ -222,9 +216,9 @@ function Pages(){
   
   this.displayHome = function(){
     
-    control.style('display', 'none');
+    hideElements();
     nextButton.style('display', 'inline-block');
-    nextButton.position(screenW/2-42, 180);
+    nextButton.position(screenW/2-42, 380);
     
     background(50);
     fill(255, 204, 0);
@@ -233,14 +227,13 @@ function Pages(){
     text(phrase,screenW/2-textWidth(phrase)/2,90);
     textSize(20);
     var phrase = "Build your resume professionally.";
-    text(phrase,screenW/2-textWidth(phrase)/2,150);
+    text(phrase,screenW/2-textWidth(phrase)/2,130);
   }
   
   this.templateScreen = function(){
     
-    control.style('display', 'none');
-    nextButton.style('display', 'inline-block');
-    nextButton.position(screenW/2-42, 180);
+    template.style('display', 'inline-block');
+    template.position(screenW/2-400, 180);
     
     background(50);
     fill(255, 204, 0);
@@ -249,14 +242,23 @@ function Pages(){
     text(phrase,screenW/2-textWidth(phrase)/2,90);
     textSize(20);
     var phrase = "Create a resume using one of out templates.";
-    text(phrase,screenW/2-textWidth(phrase)/2,150);
+    text(phrase,screenW/2-textWidth(phrase)/2,130);
   }
   
   this.loginScreen = function(){
     
-    control.style('display', 'none');
+    template.style('display', 'none');
     nextButton.style('display', 'inline-block');
-    nextButton.position(screenW/2-42, 180);
+    nextButton.position(screenW/2-42, 380);
+    firstName.style('display', 'inline-block');
+    lastName.style('display', 'inline-block');
+    firstName.position(screenW/2-400+140, 200);
+    lastName.position(screenW/2-140+140, 200);
+    
+    fname = select('#fname').value();
+    lname = select('#lname').value();
+     
+    fullname = fname + " " + lname;
     
     background(50);
     fill(255, 204, 0);
@@ -265,38 +267,39 @@ function Pages(){
     text(phrase,screenW/2-textWidth(phrase)/2,90);
     textSize(20);
     var phrase = "Lets start building your resume.";
-    text(phrase,screenW/2-textWidth(phrase)/2,150);
+    text(phrase,screenW/2-textWidth(phrase)/2,130);
   }
   
   this.resumeBuilder = function(){
-    if (pages.resumeBuilder){
-        background(200);
-        textBoxData = select('#textBox').value();
-        textBox.style('display', 'inline-block');
-        
-        var buff = '';
-        if (textWidth(buff) < 50){
-          buff = textBoxData;
-        }
-        else if (textWidth(buff) == 50){
-          buff += '\n';
-          text(buff, 20, 20);
-        }
-        
-        if (update = true){
-          header.display();
-          summary.display();
-          experience.display();
-          education.display();
-          skills.display();
-        }
-        selectElement(header);
-        selectElement(summary);
-        selectElement(experience);
-        selectElement(education);
-        selectElement(skills);
+    firstName.style('display', 'none');
+    lastName.style('display', 'none');
+    template.style('display', 'none');
+    
+    background(200);
+    
+    var buff = '';
+    if (textWidth(buff) < 50){
+      buff = textBoxData;
     }
-  }
+    else if (textWidth(buff) == 50){
+      buff += '\n';
+      text(buff, 20, 20);
+    }
+    
+    if (update = true){
+      header.display();
+      summary.display();
+      experience.display();
+      education.display();
+      skills.display();
+    }
+    selectElement(header);
+    selectElement(summary);
+    selectElement(experience);
+    selectElement(education);
+    selectElement(skills);
+}
+
   
 }
 
@@ -316,4 +319,28 @@ function onClickNext(){
   }
 }
 
+function hideElements(){
+  template.style('display', 'none');
+  firstName.style('display', 'none');
+  lastName.style('display', 'none');
+}
 
+function htmlObjectsInit(){
+  textBox = select("#textBox");
+  firstName = select("#fname");
+  lastName = select("#lname");
+  nextButton = select("#nextButton");
+  template = select("#template1");
+}
+
+/* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
