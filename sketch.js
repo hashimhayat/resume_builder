@@ -1,9 +1,13 @@
-var parser;
+var screenW = window.innerWidth;    // Screen Width
+var screenH = window.innerHeight;   // Screen Height
+
+var pages;
 var header, summary, experience, education, skills;
 var holder;
-var update;
+var update, canvas;
 var highlight;
 var textBoxData;
+var textBox, control, nextButton;
 
 function preload() {
   // load our Template (JSON) file
@@ -13,50 +17,44 @@ function preload() {
 function setup() {
   update = false;
   highlight = false
-  var canvas = createCanvas(1240,1754);
-  // parser = new Parser();
+  //var canvas = createCanvas(1240,1754);
+  var canvas = createCanvas(screenW,screenH);
+  
+  pages = new Pages();
+  textBox = select("#textBox");
+  control = select("#controls")
+  nextButton = select("#nextButton")
+  
   header = new Header();
   summary = new Summary();
   experience = new Experience();
   education = new Education();
   skills = new Skills();
-
-  header.display();
-  summary.display();
-  experience.display();
-  education.display();
-  skills.display();
+  
+  pages.home = true;
 }
 
 function draw() {
-  background(200);
-  textBoxData = select('#textBox').value();
   
-  var buff = '';
-  if (textWidth(buff) < 50){
-    buff = textBoxData;
-  }
-  else if (textWidth(buff) == 50){
-    buff += '\n';
-    text(buff, 20, 20);
+  if (pages.home){
+    pages.displayHome();
   }
   
-  
-  
-  
-  //text(update, 20,40);
-  if (update = true){
-    header.display();
-    summary.display();
-    experience.display();
-    education.display();
-    skills.display();
+  if (pages.template){
+    pages.templateScreen();
   }
-  selectElement(header);
-  selectElement(summary);
-  selectElement(experience);
-  selectElement(education);
-  selectElement(skills);
+  
+  if (pages.login){
+    pages.loginScreen();
+  }
+  
+  if (pages.builder){
+    pages.resumeBuilder();
+  }
+
+  if (pages.debug){
+    background(34,94,44);
+  }
 }
 
 function Parser(){
@@ -64,7 +62,6 @@ function Parser(){
   this.display = function(){
       
   }
-  
 }
 
 function Header(){
@@ -213,6 +210,109 @@ function toggleSettings() {
   }
   else {
     select("#controls").style('display', 'block');
+  }
+}
+
+function Pages(){
+  this.home = true;
+  this.template = false;
+  this.login = false;
+  this.builder = false;
+  this.debug = false;
+  
+  this.displayHome = function(){
+    
+    control.style('display', 'none');
+    nextButton.style('display', 'inline-block');
+    nextButton.position(screenW/2-42, 180);
+    
+    background(50);
+    fill(255, 204, 0);
+    textSize(50);
+    var phrase = "Interactive Resume Builder";
+    text(phrase,screenW/2-textWidth(phrase)/2,90);
+    textSize(20);
+    var phrase = "Build your resume professionally.";
+    text(phrase,screenW/2-textWidth(phrase)/2,150);
+  }
+  
+  this.templateScreen = function(){
+    
+    control.style('display', 'none');
+    nextButton.style('display', 'inline-block');
+    nextButton.position(screenW/2-42, 180);
+    
+    background(50);
+    fill(255, 204, 0);
+    textSize(50);
+    var phrase = "Choose a template";
+    text(phrase,screenW/2-textWidth(phrase)/2,90);
+    textSize(20);
+    var phrase = "Create a resume using one of out templates.";
+    text(phrase,screenW/2-textWidth(phrase)/2,150);
+  }
+  
+  this.loginScreen = function(){
+    
+    control.style('display', 'none');
+    nextButton.style('display', 'inline-block');
+    nextButton.position(screenW/2-42, 180);
+    
+    background(50);
+    fill(255, 204, 0);
+    textSize(50);
+    var phrase = "What is your name?";
+    text(phrase,screenW/2-textWidth(phrase)/2,90);
+    textSize(20);
+    var phrase = "Lets start building your resume.";
+    text(phrase,screenW/2-textWidth(phrase)/2,150);
+  }
+  
+  this.resumeBuilder = function(){
+    if (pages.resumeBuilder){
+        background(200);
+        textBoxData = select('#textBox').value();
+        textBox.style('display', 'inline-block');
+        
+        var buff = '';
+        if (textWidth(buff) < 50){
+          buff = textBoxData;
+        }
+        else if (textWidth(buff) == 50){
+          buff += '\n';
+          text(buff, 20, 20);
+        }
+        
+        if (update = true){
+          header.display();
+          summary.display();
+          experience.display();
+          education.display();
+          skills.display();
+        }
+        selectElement(header);
+        selectElement(summary);
+        selectElement(experience);
+        selectElement(education);
+        selectElement(skills);
+    }
+  }
+  
+}
+
+function onClickNext(){
+  //button_sound.play();
+  nextButton.style('display', 'none');
+  
+  if (pages.home){
+    pages.home = false;
+    pages.template = true;
+  } else if (pages.template){
+    pages.template = false;
+    pages.login = true;
+  } else if (pages.login){
+    pages.login = false;
+    pages.builder = true;
   }
 }
 
