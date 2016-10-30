@@ -5,7 +5,7 @@ var pages, canvas, rc;      // rc: resumeCanvas
 var header, summary, experience, education, skills, margins;
 var holder, editMode, doneEdit;
 var update, canvas;
-var highlight;
+var highlight, buff;
 var textBoxData;
 var textBox, nextButton, template, textEdit, footer;
 var firstName, lastName, fullname;
@@ -63,8 +63,17 @@ function draw() {
   // When editMode == true edit the current element
   if (editMode){
     curr_element.content = textEdit.value();
+
+    // if (textWidth(buff) < 390){
+    //   buff += textEdit.value();
+    // } else {
+    //   buff += buff + '\n';
+    //   text(buff + '\n' + 'hello', 200, 20);
+    // }
+
   } 
 }
+
 function Margins(){
   this.cls = holder.margins;
   this.li = [
@@ -222,13 +231,11 @@ function selectElement(element){
         update = true;
         
         /*  
-            Select an element when the mouse is pressed on the element
-            and editMode is off
-            Store the element into a variable
+            Select an element when the mouse is pressed on the elementand editMode is off
+            Store the current element into a variable
         */
         
         if (mouseIsPressed){
-          
           document.getElementById("text_edit").value = field.elements[i].content;
           openNav(); 
           editMode = true;
@@ -316,15 +323,6 @@ function Pages(){
     background("white");
     canvas.position(300,60);
     
-    var buff = '';
-    if (textWidth(buff) < 50){
-      buff = textBoxData;
-    }
-    else if (textWidth(buff) == 50){
-      buff += '\n';
-      text(buff, 20, 20);
-    }
-    
     if (update = true){
       header.display();
       summary.display();
@@ -379,11 +377,6 @@ function onClickNext(){
     pages.login = false;
     pages.builder = true;
   }
-}
-
-function onClickEdit(){
-  // What do you want from me?
-  editMode = true;
 }
 
 function onClickDone(){
