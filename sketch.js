@@ -63,26 +63,16 @@ function draw() {
   // When editMode == true edit the current element
   if (editMode){
     curr_element.content = textEdit.value();
-    
-  }
-  
+  } 
 }
-
-function Parser(){
-  this.contact = holder.contact;
-  this.display = function(){
-      
-  }
-}
-
 function Margins(){
   this.cls = holder.margins;
   this.li = [
-                    this.cls.topMargin,
-                    this.cls.bottomMargin,
-                    this.cls.rightMargin,
-                    this.cls.leftMargin
-                  ];
+              this.cls.topMargin,
+              this.cls.bottomMargin,
+              this.cls.rightMargin,
+              this.cls.leftMargin
+            ];
           
   this.display = function(){
     
@@ -203,8 +193,7 @@ function toText(element){
       
     if (this.elm.italics){
       textStyle(ITALIC);
-    }
-      
+    }  
       
     textSize(int(this.elm.fontsize));
     textFont(this.elm.font);
@@ -214,7 +203,6 @@ function toText(element){
 
 function selectElement(element){
   
-  var curr_idx;
   var field = element;
   var xPos;
   var yPos;
@@ -233,9 +221,11 @@ function selectElement(element){
         highlight = true;
         update = true;
         
-        // Select an element when the mouse is pressed on the element
-        // and editMode is off
-        // Store the element into a variable
+        /*  
+            Select an element when the mouse is pressed on the element
+            and editMode is off
+            Store the element into a variable
+        */
         
         if (mouseIsPressed){
           
@@ -269,12 +259,10 @@ function Pages(){
     textSize(50);
     textFont("Helvetica");
     var phrase = "Interactive Resume Builder";
-    //
     text(phrase,screenW/2-textWidth(phrase)/2,90);
     fill("white");
     textSize(20);
     var phrase = "Build your resume professionally.";
-    //
     text(phrase,screenW/2-textWidth(phrase)/2,130);
   }
   
@@ -353,7 +341,6 @@ function Pages(){
       selectElement(education);
       selectElement(skills);
     }
-
   }
 }
 
@@ -379,7 +366,7 @@ function onClickitalics(){
 }
 
 function onClickNext(){
-  //button_sound.play();
+
   nextButton.style('display', 'none');
   
   if (pages.home){
