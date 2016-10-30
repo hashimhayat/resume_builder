@@ -8,13 +8,17 @@
     <script src="libraries/p5.dom.js" type="text/javascript"></script>
     <script src="libraries/p5.sound.js" type="text/javascript"></script>
     <script src="sketch.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
     <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} 
     </style>
     
   </head>
   <body>
+    
+    <div id="resumeBuilder"></div>
     
     <div id="main">
       <button id="nextButton" name="nextButton" onclick="onClickNext(); return false;">Next</button>
@@ -25,15 +29,41 @@
 
   
     <div id = "mySidenav" class = "sidenav">
-    <a href="javascript:void(0)" class = "closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+      <h>Edit Section</h>
+      <input type="text" id="text_edit" name="text_edit" placeholder="edit">
+      <h>Text</h>
+      <input type="range" id="range1" min="12" max="24" step="1" value="12" oninput="updateRange(this);" onchange="updateRange(this);">
+      <button id="bold" name="bold" onclick="onClickbold(); return false;"><b>B</b></button>
+      <button id="italic" name="italic" onclick="onClickitalics(); return false;"><i>I</i></button>
+      <button id="editDone" name="editDone" onclick="onClickDone(); return false;">Done</button>
     </div>
-    <span onclick="openNav()">&#9776; open</span>
     
-  
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Interactive Resume</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Templates</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Demo</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a><span onclick="openNav()" class="glyphicon glyphicon-log-in"></span> Edit</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div id="footer" class="footer">Interactive Resume Builder - Fall 2016</div>
   </body>
   
 </html>

@@ -1,25 +1,27 @@
 var screenW = window.innerWidth;    // Screen Width
 var screenH = window.innerHeight;   // Screen Height
 
-var pages, canvas;
-var header, summary, experience, education, skills;
-var holder;
+var pages, canvas, rc;      // rc: resumeCanvas
+var header, summary, experience, education, skills, margins;
+var holder, editMode, doneEdit;
 var update, canvas;
 var highlight;
 var textBoxData;
-var textBox, nextButton, template;
+var textBox, nextButton, template, textEdit, footer;
 var firstName, lastName, fullname;
+var curr_element;
 
 function preload() {
-  holder = loadJSON('struct.json');
+  holder = loadJSON('template_1.json');
 }
 
 function setup() {
   update = false;
   highlight = false
+  doneEdit = false;
+  editMode = false
   
   canvas = createCanvas(screenW,screenH);
-  canvas.parent("#main");
   
   // Manages the pages on the website
   pages = new Pages();
@@ -33,6 +35,7 @@ function setup() {
   experience = new Experience();
   education = new Education();
   skills = new Skills();
+  margins = new Margins();
 }
 
 function draw() {
@@ -56,12 +59,36 @@ function draw() {
   else {
     background(34,94,44);
   }
+  
+  // When editMode == true edit the current element
+  if (editMode){
+    curr_element.content = textEdit.value();
+    
+  }
+  
 }
 
 function Parser(){
   this.contact = holder.contact;
   this.display = function(){
       
+  }
+}
+
+function Margins(){
+  this.cls = holder.margins;
+  this.li = [
+                    this.cls.topMargin,
+                    this.cls.bottomMargin,
+                    this.cls.rightMargin,
+                    this.cls.leftMargin
+                  ];
+          
+  this.display = function(){
+    
+    for (var i = 0; i < this.li.length; i++){
+      line(this.li[i].x1,this.li[i].y1,this.li[i].x2,this.li[i].y2);
+    }
   }
 }
 
@@ -168,6 +195,17 @@ function toText(element){
   
   this.write = function(){
     if (highlight) {fill(255,0,0);} else {fill(0);}
+    
+    if (this.elm.bold)
+      textStyle(BOLD);
+    else
+      textStyle(NORMAL);
+      
+    if (this.elm.italics){
+      textStyle(ITALIC);
+    }
+      
+      
     textSize(int(this.elm.fontsize));
     textFont(this.elm.font);
     text(this.elm.content, this.elm.xP,this.elm.yP);
@@ -176,6 +214,7 @@ function toText(element){
 
 function selectElement(element){
   
+  var curr_idx;
   var field = element;
   var xPos;
   var yPos;
@@ -194,16 +233,21 @@ function selectElement(element){
         highlight = true;
         update = true;
         
+        // Select an element when the mouse is pressed on the element
+        // and editMode is off
+        // Store the element into a variable
+        
         if (mouseIsPressed){
-          //field.elements[i].content = textBoxData;
-          text(field.elements[i].content,20,20);
-          update = true;
+          
+          document.getElementById("text_edit").value = field.elements[i].content;
+          openNav(); 
+          editMode = true;
+          curr_element = field.elements[i];
+          break;
         } 
-      } else {
-        highlight = false;
-        update = true;
-      } 
-  } 
+      } else { highlight = false; update = false; } 
+      
+  } // LOOP ENDS
 }
 
 
@@ -218,24 +262,28 @@ function Pages(){
     
     hideElements();
     nextButton.style('display', 'inline-block');
-    nextButton.position(screenW/2-42, 380);
+    nextButton.position(screenW/2-55, 380);
     
-    background(50);
-    fill(255, 204, 0);
+    background("#262228");
+    fill("#FFCE00");
     textSize(50);
+    textFont("Helvetica");
     var phrase = "Interactive Resume Builder";
+    //
     text(phrase,screenW/2-textWidth(phrase)/2,90);
+    fill("white");
     textSize(20);
     var phrase = "Build your resume professionally.";
+    //
     text(phrase,screenW/2-textWidth(phrase)/2,130);
   }
   
   this.templateScreen = function(){
     
     template.style('display', 'inline-block');
-    template.position(screenW/2-400, 180);
+    template.position(screenW/2-400, 280);
     
-    background(50);
+    background("#262228");
     fill(255, 204, 0);
     textSize(50);
     var phrase = "Choose a template";
@@ -249,33 +297,36 @@ function Pages(){
     
     template.style('display', 'none');
     nextButton.style('display', 'inline-block');
-    nextButton.position(screenW/2-42, 380);
+    nextButton.position(screenW/2-55, 380);
     firstName.style('display', 'inline-block');
     lastName.style('display', 'inline-block');
-    firstName.position(screenW/2-400+140, 200);
-    lastName.position(screenW/2-140+140, 200);
+    firstName.position(screenW/2-400+155, 230);
+    lastName.position(screenW/2-140+155, 230);
     
     fname = select('#fname').value();
     lname = select('#lname').value();
      
     fullname = fname + " " + lname;
     
-    background(50);
+    background("#262228");
     fill(255, 204, 0);
     textSize(50);
     var phrase = "What is your name?";
     text(phrase,screenW/2-textWidth(phrase)/2,90);
     textSize(20);
-    var phrase = "Lets start building your resume.";
+    var phrase = "Let's start building your resume.";
     text(phrase,screenW/2-textWidth(phrase)/2,130);
   }
   
   this.resumeBuilder = function(){
+    
     firstName.style('display', 'none');
     lastName.style('display', 'none');
     template.style('display', 'none');
+    footer.style('display', 'none');
     
-    background(200);
+    background("white");
+    canvas.position(300,60);
     
     var buff = '';
     if (textWidth(buff) < 50){
@@ -292,15 +343,39 @@ function Pages(){
       experience.display();
       education.display();
       skills.display();
+      margins.display();
     }
-    selectElement(header);
-    selectElement(summary);
-    selectElement(experience);
-    selectElement(education);
-    selectElement(skills);
+    
+    if(!editMode) {
+      selectElement(header);
+      selectElement(summary);
+      selectElement(experience);
+      selectElement(education);
+      selectElement(skills);
+    }
+
+  }
 }
 
-  
+/* Editing Functions */
+
+function updateRange(clickedRange) {
+  var newfontSize = int(clickedRange.value);
+  curr_element.fontsize = newfontSize;
+}
+
+function onClickbold(){
+  if (curr_element.bold)
+    curr_element.bold = false;
+  else 
+    curr_element.bold = true;
+}
+
+function onClickitalics(){
+  if (curr_element.italics)
+    curr_element.italics = false;
+  else 
+    curr_element.italics = true;
 }
 
 function onClickNext(){
@@ -319,6 +394,16 @@ function onClickNext(){
   }
 }
 
+function onClickEdit(){
+  // What do you want from me?
+  editMode = true;
+}
+
+function onClickDone(){
+  editMode = false;
+  closeNav();
+}
+
 function hideElements(){
   template.style('display', 'none');
   firstName.style('display', 'none');
@@ -326,6 +411,16 @@ function hideElements(){
 }
 
 function htmlObjectsInit(){
+  doneButton = select("#editDone");
+  doneButton.position(160,300);
+  boldButton = select("#bold");
+  boldButton.position(10,250);
+  italButton = select("#italic");
+  italButton.position(40,250);
+  
+  doneButton.position(160,400);
+  footer = select("#footer")
+  textEdit = select("#text_edit");
   textBox = select("#textBox");
   firstName = select("#fname");
   lastName = select("#lname");
@@ -343,4 +438,10 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
+}
+
+function windowResized() {
+  screenW = window.innerWidth;    // Screen Width
+  screenH = window.innerHeight;   // Screen Height
+  canvas.size(window.innerWidth, window.innerHeight);
 }

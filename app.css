@@ -1,6 +1,20 @@
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 20px;
+}
+
+#main {
+  font-family: Century Gothic;
+}
+
+#text_edit {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: white;
+    color: black;
 }
 
 #control {
@@ -28,11 +42,12 @@ body {
   margin-top: 20px;
 }
 
-#nextButton {
-  background-color: #4CAF50;
+#nextButton, #editButton, #editDone {
+  font-family: Century Gothic;
+  background-color: #0375B4;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 20px 38px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -41,8 +56,25 @@ body {
   cursor: pointer;
 }
 
- #template1 {
+#editDone {
+  font-family: Century Gothic;
+  background-color: #0375B4;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#nextButton:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#template1 {
   background-color: #4CAF50;
+  font-family: Century Gothic;;
   border: none;
   color: white;
   padding: 60px 60px;
@@ -51,6 +83,18 @@ body {
   font-size: 16px;
   margin: 4px 4px;
   cursor: pointer;
+}
+
+#template1:hover {
+    background-color: #0375B4;
+    color: white;
+}
+
+#range1 {
+  position: relative;
+  left: 18px;
+  width: 200px; 
+  background: transparent; /* Otherwise white in Chrome */
 }
 
 input[type=text], select {
@@ -73,10 +117,10 @@ input[type=text], select {
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 40px;
 }
 
-.sidenav a {
+.sidenav a{
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -84,6 +128,25 @@ input[type=text], select {
     display: block;
     transition: 0.3s
 }
+
+h4 {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
+h {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s
+}
+
 
 .sidenav a:hover, .offcanvas a:focus{
     color: #f1f1f1;
@@ -97,12 +160,50 @@ input[type=text], select {
     margin-left: 50px;
 }
 
-#main {
+#resumeBuilder {
     transition: margin-left .5s;
-    padding: 16px;
+    background-color: white;
+    padding-left: 60px;
 }
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  font-size: 14px;
+  background-color: #efefef;
+  text-align: center;
+  margin: 0 auto;
+}
+
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+.icon-bar {
+    width: 100%;
+    text-align: center;
+    background-color: #555;
+    overflow: auto;
+}
+
+.icon-bar a {
+    width: 20%;
+    padding: 12px 0;
+    float: left;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36px;
+}
+
+.icon-bar a:hover {
+    background-color: #000;
+}
+
+.active {
+    background-color: #4CAF50 !important;
 }
