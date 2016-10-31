@@ -5,8 +5,8 @@ var pages, canvas, rc;      // rc: resumeCanvas
 var header, summary, experience, education, skills, margins;
 var holder, editMode, doneEdit;
 var update, canvas;
-var highlight, buff;
-var original_canvas;
+var highlight, linebuff;
+var superBuff;
 var textBox, nextButton, template, textEdit, footer;
 var firstName, lastName, fullname;
 var curr_element;
@@ -17,9 +17,11 @@ function preload() {
 
 function setup() {
   update = false;
-  highlight = false
+  highlight = false;
   doneEdit = false;
-  editMode = false
+  editMode = false;
+  
+  superBuff = '';
   
   canvas = createCanvas(screenW,screenH);
   original_canvas = canvas;
@@ -64,15 +66,7 @@ function draw() {
   // When editMode == true edit the current element
   if (editMode){
     curr_element.content = textEdit.value();
-    document.getElementById('range1').value = getFont();
-
-    // if (textWidth(buff) < 390){
-    //   buff += textEdit.value();
-    // } else {
-    //   buff += buff + '\n';
-    //   text(buff + '\n' + 'hello', 200, 20);
-    // }
-
+    lineBreak();
   } 
 }
 
@@ -354,6 +348,22 @@ function Pages(){
 }
 
 /* Editing Functions */
+
+function reset_EditText(){
+  document.getElementById("text_edit").value = '';
+}
+
+function lineBreak(){
+  
+    if (textWidth(linebuff) < 390){
+      linebuff = textEdit.value();
+    } else  {
+      superBuff += linebuff + '\n';
+      linebuff = '';
+      reset_EditText();
+    } 
+      curr_element.content = superBuff + linebuff;
+}
 
 function getFont(){
   fontdiv.value = curr_element.fontsize;
