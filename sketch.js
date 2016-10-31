@@ -7,8 +7,8 @@ var holder, editMode, doneEdit;
 var update, canvas;
 var highlight, linebuff;
 var superBuff;
-var textBox, nextButton, template, textEdit, footer;
-var firstName, lastName, fullname;
+var textBox, nextButton, template, textEdit, footer, add;
+var firstName, lastName, fullname, address;
 var curr_element;
 
 function preload() {
@@ -82,7 +82,10 @@ function Margins(){
   this.display = function(){
     
     for (var i = 0; i < this.li.length; i++){
+      stroke(255, 204, 0);
+      strokeWeight(1);
       line(this.li[i].x1,this.li[i].y1,this.li[i].x2,this.li[i].y2);
+      noStroke();
     }
   }
 }
@@ -101,6 +104,9 @@ function Header(){
     
     if (fullname){
       this.cls.name.content = fullname;
+    }
+    if (address){
+      this.cls.address.content = address;
     }
     
     for (var i = 0; i < this.elements.length; i++){
@@ -296,17 +302,23 @@ function Pages(){
     //canvas.position(0,70);
     
     template.style('display', 'none');
-    nextButton.style('display', 'inline-block');
-    nextButton.position(screenW/2-55, 380);
     firstName.style('display', 'inline-block');
     lastName.style('display', 'inline-block');
+    add.style('display', 'inline-block');
     firstName.position(screenW/2-400+155, 230);
     lastName.position(screenW/2-140+155, 230);
+    add.position(screenW/2-245, 300);
     
     fname = select('#fname').value();
     lname = select('#lname').value();
+    address = select('#address').value();
      
     fullname = fname + " " + lname;
+    
+    if (fullname != ' '){
+      nextButton.style('display', 'inline-block');
+      nextButton.position(screenW/2-55, 380);
+    }
     
     background("#262228");
     fill(255, 204, 0);
@@ -357,11 +369,21 @@ function lineBreak(){
   
     if (textWidth(linebuff) < 390){
       linebuff = textEdit.value();
-    } else  {
+    }
+    else  {
       superBuff += linebuff + '\n';
       linebuff = '';
       reset_EditText();
     } 
+    
+    var count = 0
+    if (keyIsPressed && keyCode == ENTER){
+      if (count == 0)
+        superBuff += linebuff + '\n';
+        linebuff = '';
+        reset_EditText();
+        count += 1;
+    }
       curr_element.content = superBuff + linebuff;
 }
 
@@ -434,13 +456,14 @@ function keyPressed() {
 
 function hideElements(){
   template.style('display', 'none');
+  add.style('display', 'none');
   firstName.style('display', 'none');
   lastName.style('display', 'none');
 }
 
 function htmlObjectsInit(){
   
-  fontdiv = select("#fontsize");
+  
   doneButton = select("#editDone");
   doneButton.position(160,300);
   boldButton = select("#bold");
@@ -448,11 +471,13 @@ function htmlObjectsInit(){
   italButton = select("#italic");
   italButton.position(40,250);
   
+  fontdiv = select("#fontsize");
   footer = select("#footer")
   textEdit = select("#text_edit");
   textBox = select("#textBox");
   firstName = select("#fname");
   lastName = select("#lname");
+  add = select("#address")
   nextButton = select("#nextButton");
   template = select("#template1");
 }

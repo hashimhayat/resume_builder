@@ -70,6 +70,7 @@
           "content": "Summary",
           "font": "Garamond",
           "fontsize": 16,
+          "bold": true,
           "xP": 50,
           "yP": 170
           },
@@ -98,6 +99,7 @@
           "content": "Experience",
           "font": "Garamond",
           "fontsize": 16,
+          "bold": true,
           "xP": 50,
           "yP": 210
           },
@@ -189,6 +191,7 @@
               "content": "Education",
               "font": "Garamond",
               "fontsize": 16,
+              "bold": true,
               "xP": 50,
               "yP": 450
             },
@@ -234,6 +237,7 @@
               "content": "Skills",
               "font": "Garamond",
               "fontsize": 16,
+              "bold": true,
               "xP": 50,
               "yP": 530
             },
@@ -266,9 +270,9 @@
   "bottomMargin": 
             {
               "x1": 20,
-              "y1": 815,
+              "y1": 800,
               "x2": 617,
-              "y2": 815
+              "y2": 800
             },
    "leftMargin": 
             {
