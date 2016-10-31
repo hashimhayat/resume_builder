@@ -7,7 +7,7 @@
               "font": "Garamond",
               "fontsize": 16,
               "bold": true,
-              "italics": true,
+              "italics": false,
               "xP": 50,
               "yP": 50
             },
@@ -16,8 +16,8 @@
               "content": "FirstName LastName",
               "font": "Garamond",
               "fontsize": 20,
-              "bold": true,
-              "italics": true,
+              "bold": false,
+              "italics": false,
               "xP": 300,
               "yP": 50
             },
@@ -27,8 +27,8 @@
               "content": "Street Address City, State Zip",
               "font": "Garamond",
               "fontsize": 12,
-              "bold": true,
-              "italics": true,
+              "bold": false,
+              "italics": false,
               "xP": 300,
               "yP": 90
             },
@@ -38,8 +38,8 @@
               "content": "000-000-0000",
               "font": "Garamond",
               "fontsize": 12,
-              "bold": true,
-              "italics": true,
+              "bold": false,
+              "italics": false,
               "xP": 300,
               "yP": 110
             },

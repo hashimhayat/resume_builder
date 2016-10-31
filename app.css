@@ -129,10 +129,10 @@ input[type=text], select {
     transition: 0.3s
 }
 
-h4 {
+h2 {
     padding: 8px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 18px;
     color: white;
     display: block;
     transition: 0.3s
@@ -141,7 +141,7 @@ h4 {
 h {
     padding: 8px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 12px;
     color: white;
     display: block;
     transition: 0.3s

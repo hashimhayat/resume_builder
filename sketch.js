@@ -6,7 +6,7 @@ var header, summary, experience, education, skills, margins;
 var holder, editMode, doneEdit;
 var update, canvas;
 var highlight, buff;
-var textBoxData;
+var original_canvas;
 var textBox, nextButton, template, textEdit, footer;
 var firstName, lastName, fullname;
 var curr_element;
@@ -22,6 +22,7 @@ function setup() {
   editMode = false
   
   canvas = createCanvas(screenW,screenH);
+  original_canvas = canvas;
   
   // Manages the pages on the website
   pages = new Pages();
@@ -63,6 +64,7 @@ function draw() {
   // When editMode == true edit the current element
   if (editMode){
     curr_element.content = textEdit.value();
+    document.getElementById('range1').value = getFont();
 
     // if (textWidth(buff) < 390){
     //   buff += textEdit.value();
@@ -103,7 +105,9 @@ function Header(){
           
   this.display = function(){
     
-    this.cls.name.content = fullname;
+    if (fullname){
+      this.cls.name.content = fullname;
+    }
     
     for (var i = 0; i < this.elements.length; i++){
       var txt = new toText(this.elements[i]);
@@ -271,10 +275,15 @@ function Pages(){
     textSize(20);
     var phrase = "Build your resume professionally.";
     text(phrase,screenW/2-textWidth(phrase)/2,130);
+    
+    //canvas.position(0,70);
   }
   
   this.templateScreen = function(){
     
+    //canvas.position(0,70);
+    
+    nextButton.style('display', 'none');
     template.style('display', 'inline-block');
     template.position(screenW/2-400, 280);
     
@@ -289,6 +298,8 @@ function Pages(){
   }
   
   this.loginScreen = function(){
+    
+    //canvas.position(0,70);
     
     template.style('display', 'none');
     nextButton.style('display', 'inline-block');
@@ -344,6 +355,11 @@ function Pages(){
 
 /* Editing Functions */
 
+function getFont(){
+  fontdiv.value = curr_element.fontsize;
+  console.log(curr_element.fontsize);
+}
+
 function updateRange(clickedRange) {
   var newfontSize = int(clickedRange.value);
   curr_element.fontsize = newfontSize;
@@ -379,9 +395,31 @@ function onClickNext(){
   }
 }
 
+function gotoPage(pg){
+  
+  // Set all pages to false
+  pages.home = false; pages.template = false; 
+  pages.login = false; pages.builder = false;
+  
+  // Set the page to display to true
+  if (pg == 1)
+    pages.home = true;
+  else if (pg == 2)
+    pages.template = true;
+  else if (pg == 3)
+    pages.login = true;
+  else if (pg == 4)
+    pages.builder = true;
+}
+
 function onClickDone(){
   editMode = false;
   closeNav();
+}
+
+function keyPressed() {
+  if (keyCode == LEFT_ARROW)
+    save('test.png');
 }
 
 function hideElements(){
@@ -391,6 +429,8 @@ function hideElements(){
 }
 
 function htmlObjectsInit(){
+  
+  fontdiv = select("#fontsize");
   doneButton = select("#editDone");
   doneButton.position(160,300);
   boldButton = select("#bold");
@@ -398,7 +438,6 @@ function htmlObjectsInit(){
   italButton = select("#italic");
   italButton.position(40,250);
   
-  doneButton.position(160,400);
   footer = select("#footer")
   textEdit = select("#text_edit");
   textBox = select("#textBox");

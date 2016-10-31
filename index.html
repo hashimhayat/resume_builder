@@ -29,10 +29,11 @@
 
   
     <div id = "mySidenav" class = "sidenav">
-      <h>Edit Section</h>
+      <h2>Edit Section</h2>
       <input type="text" id="text_edit" name="text_edit" placeholder="edit">
-      <h>Text</h>
-      <input type="range" id="range1" min="12" max="24" step="1" value="12" oninput="updateRange(this);" onchange="updateRange(this);">
+      <h>Text Size</h>
+      <div id = 'fontsize'></div>
+      <input type="range" id="range1" min="12" max="24" step="1" oninput="updateRange(this);" onchange="updateRange(this);">
       <button id="bold" name="bold" onclick="onClickbold(); return false;"><b>B</b></button>
       <button id="italic" name="italic" onclick="onClickitalics(); return false;"><i>I</i></button>
       <button id="editDone" name="editDone" onclick="onClickDone(); return false;">Done</button>
@@ -50,13 +51,13 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Templates</a></li>
+            <li class="active"><a href="javascript:gotoPage(1);">Home</a></li>
+            <li><a href="javascript:gotoPage(2);">Templates</a></li>
             <li><a href="#">Documentation</a></li>
-            <li><a href="#">Demo</a></li>
+            <li><a href="javascript:gotoPage(4);">Demo</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span onclick="gotoPage(3)" class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a><span onclick="openNav()" class="glyphicon glyphicon-log-in"></span> Edit</a></li>
           </ul>
         </div>
